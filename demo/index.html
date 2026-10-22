@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UniSlider — Demo</title>
+  <meta name="description" content="UniSlider: a lightweight, dependency-free slider & carousel with live rain effects, layer animations, 40 transitions, presets and templates.">
+  <link rel="stylesheet" href="../dist/unislider.css">
+  <link rel="stylesheet" href="../dist/unislider-templates.css">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <header class="demo-header">
+    <a class="demo-logo" href="#"><svg class="demo-drop" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5C9 7 5.5 10.6 5.5 14.5a6.5 6.5 0 0 0 13 0C18.5 10.6 15 7 12 2.5z"/></svg>Uni<span>Slider</span></a>
+    <nav>
+      <a href="#rain">Rain</a>
+      <a href="#playground">Playground</a>
+      <a href="#templates">Templates</a>
+      <a href="#carousels">Carousels</a>
+      <a href="#usage">Usage</a>
+    </nav>
+  </header>
+
+  <!-- 1. Hand-written markup: layers, live rain, Ken Burns, per-slide transitions -->
+  <div id="hero" class="demo-hero">
+    <div data-us-bg="assets/city.svg" data-us-overlay="0.2" data-us-title="Live rain" data-us-rain="rain" data-us-transition="melt" data-us-kenburns="rain-zoom">
+      <div class="hero-copy">
+        <p class="hero-kicker" data-us-layer="mist-in" data-us-delay="100">UniSlider 1.0</p>
+        <h1 class="hero-title" data-us-layer="rainfall" data-us-split="chars" data-us-stagger="random:28" data-us-delay="200" data-us-out="fade-up">Slides that fall like rain</h1>
+        <p class="hero-text" data-us-layer="mist-in" data-us-delay="1000">Live weather, 40 transitions, layer animations, Ken Burns and parallax — in one dependency-free script.</p>
+        <div class="hero-actions" data-us-layer="splash-in" data-us-delay="1300">
+          <a class="us-btn" href="#usage">Get started</a>
+          <a class="us-btn us-btn--ghost" href="#rain">See the rain</a>
+        </div>
+      </div>
+      <div class="hero-badge" data-us-layer="raindrop" data-us-delay="1500" data-us-loop="bob" data-us-parallax="30">40<small>transitions</small></div>
+    </div>
+
+    <div data-us-bg="assets/lake.svg" data-us-overlay="0.15" data-us-title="Ripples" data-us-rain="drizzle" data-us-transition="ripple" data-us-kenburns="drift-down">
+      <div class="hero-copy hero-copy--center">
+        <p class="hero-kicker" data-us-layer="ripple-in">Ripple · Drip · Mist · Splash</p>
+        <h2 class="hero-title" data-us-layer="wave-in" data-us-split="chars" data-us-stagger="40" data-us-delay="150">Every drop makes a ripple</h2>
+        <p class="hero-text" data-us-layer="mist-in" data-us-delay="900">Click anywhere on this slider — the surface answers with water ripples.</p>
+      </div>
+    </div>
+
+    <div data-us-bg="assets/ocean.svg" data-us-overlay="0.35" data-us-title="Storm" data-us-rain="storm" data-us-transition="storm" data-us-kenburns="zoom-out">
+      <div class="hero-copy hero-copy--right">
+        <p class="hero-kicker" data-us-layer="fade-left">Storm · Thunder · Downpour</p>
+        <h2 class="hero-title" data-us-layer="drop" data-us-delay="250">Bring the storm</h2>
+        <p class="hero-text" data-us-layer="wash-in" data-us-delay="600">Wind-driven rain, splashes on the ground and lightning that strikes on its own.</p>
+      </div>
+      <div class="hero-orb" data-us-layer="splash-in" data-us-delay="400" data-us-loop="jelly" data-us-parallax="-40"></div>
+    </div>
+
+    <div data-us-bg="assets/forest.svg" data-us-overlay="0.3" data-us-title="Rain on glass" data-us-rain="glass" data-us-transition="drip">
+      <div class="hero-copy hero-copy--center">
+        <p class="hero-kicker" data-us-layer="drip-in">Drops on glass · Mist · Trails</p>
+        <h2 class="hero-title" data-us-layer="mist-in" data-us-delay="200">A window on a rainy day</h2>
+        <p class="hero-text" data-us-layer="fade-up" data-us-delay="700">Droplets gather, grow heavy and slide down the glass, leaving trails behind.</p>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- 2. Rain studio -->
+    <section class="demo-section" id="rain">
+      <div class="demo-head">
+        <h2>Rain studio</h2>
+        <p>Live weather drawn on a canvas, rain transitions and ripple clicks. Change the weather, fire a transition or call down lightning.</p>
+      </div>
+      <div class="demo-controls">
+        <label>Weather
+          <select id="rain-weather">
+            <option value="off">off</option>
+            <option>drizzle</option>
+            <option selected>rain</option>
+            <option>downpour</option>
+            <option>storm</option>
+            <option>monsoon</option>
+            <option>glass</option>
+            <option>mist</option>
+          </select>
+        </label>
+        <label>Wind <input id="rain-wind" type="range" min="-40" max="40" step="2" value="8"></label>
+        <label>Rain layer
+          <select id="rain-layer">
+            <option value="over">over the content</option>
+            <option value="back">behind the content</option>
+          </select>
+        </label>
+        <div class="demo-buttons demo-buttons--wrap" id="rain-transitions"></div>
+        <div class="demo-buttons">
+          <button type="button" id="rain-strike">⚡ Lightning</button>
+        </div>
+      </div>
+      <div id="rain-slider">
+        <div data-us-bg="assets/city.svg" data-us-title="City">
+          <div class="pg-copy"><h3 class="pg-title" data-us-layer="rainfall" data-us-split="chars" data-us-stagger="random">Night city</h3><p data-us-layer="mist-in" data-us-delay="600">Click the scene for ripples</p></div>
+        </div>
+        <div data-us-bg="assets/lake.svg" data-us-title="Lake">
+          <div class="pg-copy"><h3 class="pg-title" data-us-layer="wave-in" data-us-split="chars" data-us-stagger="45">Moon lake</h3><p data-us-layer="mist-in" data-us-delay="600">Puddles, ripples and reflections</p></div>
+        </div>
+        <div data-us-bg="assets/forest.svg" data-us-title="Forest">
+          <div class="pg-copy"><h3 class="pg-title" data-us-layer="raindrop">Wet forest</h3><p data-us-layer="mist-in" data-us-delay="600">Mist drifting between the trees</p></div>
+        </div>
+        <div data-us-bg="assets/sunset.svg" data-us-title="Sunset">
+          <div class="pg-copy"><h3 class="pg-title" data-us-layer="splash-in">Summer shower</h3><p data-us-layer="mist-in" data-us-delay="600">Rain with the sun still out</p></div>
+        </div>
+      </div>
+      <pre class="demo-code" id="rain-code"></pre>
+    </section>
+
+    <!-- 3. Playground -->
+    <section class="demo-section" id="playground">
+      <div class="demo-head">
+        <h2>Playground</h2>
+        <p>Pick a transition, layer animation or mode — everything can also be changed at runtime with <code>slider.update()</code>.</p>
+      </div>
+      <div class="demo-controls">
+        <label>Transition <select id="pg-transition"></select></label>
+        <label>Layer animation <select id="pg-layer"></select></label>
+        <label>Mode
+          <select id="pg-mode">
+            <option value="hybrid">hybrid (auto + controls)</option>
+            <option value="auto">auto</option>
+            <option value="manual">manual</option>
+          </select>
+        </label>
+        <label>Theme
+          <select id="pg-theme">
+            <option>dark</option><option>light</option><option>glass</option><option>minimal</option><option>neon</option><option>rounded</option>
+          </select>
+        </label>
+        <label>Speed <input id="pg-speed" type="range" min="200" max="2500" step="100" value="1000"> <output id="pg-speed-out">1000ms</output></label>
+        <div class="demo-buttons">
+          <button type="button" id="pg-prev">← Prev</button>
+          <button type="button" id="pg-next">Next →</button>
+        </div>
+      </div>
+      <div id="playground-slider">
+        <div data-us-bg="assets/desert.svg" data-us-title="Desert">
+          <div class="pg-copy"><h3 class="pg-title" data-us-layer="fade-up">Desert</h3><p data-us-layer="fade-up" data-us-delay="250">Slide one</p></div>
+        </div>
+        <div data-us-bg="assets/neon.svg" data-us-title="Neon">
+          <div class="pg-copy"><h3 class="pg-title" data-us-layer="fade-up">Neon</h3><p data-us-layer="fade-up" data-us-delay="250">Slide two</p></div>
+        </div>
+        <div data-us-bg="assets/ocean.svg" data-us-title="Ocean">
+          <div class="pg-copy"><h3 class="pg-title" data-us-layer="fade-up">Ocean</h3><p data-us-layer="fade-up" data-us-delay="250">Slide three</p></div>
+        </div>
+        <div data-us-bg="assets/aurora.svg" data-us-title="Aurora">
+          <div class="pg-copy"><h3 class="pg-title" data-us-layer="fade-up">Aurora</h3><p data-us-layer="fade-up" data-us-delay="250">Slide four</p></div>
+        </div>
+      </div>
+      <pre class="demo-code" id="pg-code"></pre>
+    </section>
+
+    <!-- 3. Templates -->
+    <section class="demo-section" id="templates">
+      <div class="demo-head">
+        <h2>Templates</h2>
+        <p>Pass data, get a finished slider. Each template is a few lines of JavaScript.</p>
+      </div>
+
+      <h3 class="demo-sub">rain-hero</h3>
+      <div id="tpl-rain"></div>
+
+      <h3 class="demo-sub">hero-split</h3>
+      <div id="tpl-split"></div>
+
+      <h3 class="demo-sub">product-showcase</h3>
+      <div id="tpl-product"></div>
+
+      <h3 class="demo-sub">agency</h3>
+      <div id="tpl-agency"></div>
+
+      <h3 class="demo-sub">testimonials</h3>
+      <div id="tpl-testimonials" class="demo-card-bg"></div>
+
+      <h3 class="demo-sub">news-headlines</h3>
+      <div id="tpl-news"></div>
+
+      <h3 class="demo-sub">vertical-showcase</h3>
+      <div id="tpl-vertical"></div>
+    </section>
+
+    <!-- 4. Carousels -->
+    <section class="demo-section" id="carousels">
+      <div class="demo-head">
+        <h2>Carousels</h2>
+        <p>Seamless looping without cloned slides, momentum dragging, multi-slide views and 3D effects.</p>
+      </div>
+
+      <h3 class="demo-sub">cards-carousel <small>(perView 1 → 2 → 3 with breakpoints)</small></h3>
+      <div id="tpl-cards"></div>
+
+      <h3 class="demo-sub">coverflow-gallery</h3>
+      <div id="tpl-coverflow" class="demo-dark"></div>
+
+      <div class="demo-grid">
+        <div>
+          <h3 class="demo-sub">ring</h3>
+          <div id="fx-ring" class="demo-dark"></div>
+        </div>
+        <div>
+          <h3 class="demo-sub">cards stack</h3>
+          <div id="fx-cards" class="demo-dark"></div>
+        </div>
+      </div>
+
+      <div class="demo-grid">
+        <div>
+          <h3 class="demo-sub">waves</h3>
+          <div id="fx-waves" class="demo-dark"></div>
+        </div>
+        <div>
+          <h3 class="demo-sub">waterfall</h3>
+          <div id="fx-waterfall" class="demo-dark"></div>
+        </div>
+      </div>
+
+      <h3 class="demo-sub">logo-ticker</h3>
+      <div id="tpl-ticker"></div>
+
+      <h3 class="demo-sub">No JavaScript needed <small>(data-unislider attribute)</small></h3>
+      <div data-unislider='{"preset":"carousel","navigation":{"bulletStyle":"numbers"},"autoplay":false}' id="auto-init">
+        <div class="demo-tile" style="--c:#6c5ce7">1</div>
+        <div class="demo-tile" style="--c:#00b894">2</div>
+        <div class="demo-tile" style="--c:#e17055">3</div>
+        <div class="demo-tile" style="--c:#0984e3">4</div>
+        <div class="demo-tile" style="--c:#fdcb6e">5</div>
+        <div class="demo-tile" style="--c:#e84393">6</div>
+      </div>
+    </section>
+
+    <!-- 5. Usage -->
+    <section class="demo-section" id="usage">
+      <div class="demo-head">
+        <h2>Usage</h2>
+        <p>Three ways in — pick whichever suits your site.</p>
+      </div>
+      <div class="demo-usage">
+        <div>
+          <h3>1 · Markup only</h3>
+<pre class="demo-code">&lt;link rel="stylesheet" href="unislider.min.css"&gt;
+&lt;script src="unislider.min.js" defer&gt;&lt;/script&gt;
+
+&lt;div data-unislider="rainy"&gt;
+  &lt;div data-us-bg="slide-1.jpg" data-us-rain="storm"&gt;
+    &lt;h2 data-us-layer="rainfall" data-us-split="chars"
+        data-us-stagger="random"&gt;Hello&lt;/h2&gt;
+  &lt;/div&gt;
+  &lt;div data-us-bg="slide-2.jpg" data-us-transition="ripple"&gt;…&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+        <div>
+          <h3>2 · JavaScript options</h3>
+<pre class="demo-code">const slider = new UniSlider('#hero', {
+  preset: 'hero',
+  transition: ['rain', 'drip', 'cube'],
+  rain: 'storm',         // live weather on a canvas
+  ripple: true,          // water ripples on click
+  mode: 'auto',          // auto | manual | hybrid
+  autoplay: { delay: 6000 },
+  breakpoints: { 768: { layout: 'fullscreen' } },
+});
+
+slider.on('change', ({ index }) =&gt; …);
+slider.next();</pre>
+        </div>
+        <div>
+          <h3>3 · Templates</h3>
+<pre class="demo-code">UniSlider.create('#reviews', {
+  template: 'testimonials',
+  slides: [
+    { quote: 'Fantastic!', name: 'Ana', role: 'CEO' },
+    { quote: 'So easy.',   name: 'Rui', role: 'Dev' },
+  ],
+});</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="demo-footer">UniSlider · MIT License</footer>
+
+  <script src="../dist/unislider.js"></script>
+  <script src="demo.js"></script>
+</body>
+</html>

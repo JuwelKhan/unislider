@@ -1,0 +1,66 @@
+{
+  "name": "unislider",
+  "version": "1.0.0",
+  "description": "Lightweight, dependency-free slider & carousel with layer animations, 25+ transitions, presets and templates — a modern alternative to heavyweight slider builders.",
+  "keywords": [
+    "slider",
+    "carousel",
+    "hero-slider",
+    "layer-animation",
+    "ken-burns",
+    "parallax",
+    "coverflow",
+    "web-animations",
+    "accessibility",
+    "carousel-slider",
+    "rain-effect",
+    "canvas",
+    "slider-revolution-alternative"
+  ],
+  "homepage": "https://juwelkhan.github.io/unislider/",
+  "bugs": {
+    "url": "https://github.com/JuwelKhan/unislider/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuwelKhan/unislider.git"
+  },
+  "license": "MIT",
+  "author": "Jewel Khan (https://github.com/JuwelKhan)",
+  "type": "module",
+  "main": "dist/unislider.js",
+  "module": "dist/unislider.esm.js",
+  "types": "types/index.d.ts",
+  "unpkg": "dist/unislider.min.js",
+  "jsdelivr": "dist/unislider.min.js",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/unislider.esm.js",
+      "default": "./dist/unislider.js"
+    },
+    "./css": "./dist/unislider.css",
+    "./src/*": "./src/*"
+  },
+  "files": [
+    "dist",
+    "src",
+    "css",
+    "types",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js --watch",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "test:unit": "node --test \"tests/unit/*.test.js\"",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "playwright": "1.56.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
