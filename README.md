@@ -1,5 +1,6 @@
 # UniSlider
 
+[![npm](https://img.shields.io/npm/v/unislider.svg)](https://www.npmjs.com/package/unislider)
 [![CI](https://github.com/JuwelKhan/unislider/actions/workflows/ci.yml/badge.svg)](https://github.com/JuwelKhan/unislider/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Live demo](https://img.shields.io/badge/demo-live-4fc3f7.svg)](https://juwelkhan.github.io/unislider/)
@@ -81,6 +82,8 @@ WordPress, Laravel, React/Vue (via the ES module), static site generators…
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuwelKhan/unislider@1.0.0/dist/unislider-templates.min.css">
 ```
 
+The same files are also on unpkg: `https://unpkg.com/unislider@1.0.0/dist/unislider.min.js`.
+
 **Download** — grab the files from the [latest release](https://github.com/JuwelKhan/unislider/releases) or
 copy the `dist/` folder into your project:
 
@@ -91,7 +94,7 @@ copy the `dist/` folder into your project:
 | `dist/unislider.min.css` | core styles + themes (required) |
 | `dist/unislider-templates.min.css` | styles for the built-in templates (only if you use `template:`) |
 
-**npm** (coming soon):
+**npm**:
 
 ```bash
 npm install unislider
@@ -540,7 +543,7 @@ and options are minor releases; anything that changes existing behaviour is a ma
 
 **UniSlider** (Universal Slider) একটি হালকা (≈২৮ KB) জাভাস্ক্রিপ্ট স্লাইডার/ক্যারোসেল প্লাগিন — কোনো ডিপেন্ডেন্সি নেই, যেকোনো ওয়েবসাইটে চলে। এর বিশেষত্ব হলো আসল বৃষ্টি: স্লাইডের উপর লাইভ বৃষ্টি, বজ্রপাত, কাচে জমা ফোঁটা, কুয়াশা আর বৃষ্টির ট্রানজিশন।
 
-**১. ফাইল যুক্ত করুন**
+**১. ফাইল যুক্ত করুন** (CDN থেকে, অথবা `npm install unislider`)
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JuwelKhan/unislider@1.0.0/dist/unislider.min.css">
